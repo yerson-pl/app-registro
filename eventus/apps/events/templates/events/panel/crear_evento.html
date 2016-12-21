@@ -1,0 +1,97 @@
+{% extends "events/base_events.html" %}
+
+{% block title %}Panel{% endblock title %}
+
+{% block content %}
+
+    {% include "events/panel/navbar.html" %}
+
+    <div class="container">
+
+        <div class="page-header">
+            <h4>
+                <a href="{% url 'events_app:panel' %}" class="btn btn-success">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
+                </a>
+                <strong>Crear evento</strong>
+            </h4>
+        </div><!-- page-header -->
+
+        <div class="row">
+            
+            <div class="col-md-12">
+
+                <form role="form" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <p class="lead"><span class="glyphicon glyphicon-info-sign"></span> Ingresa los datos de tu evento y compartelo con todos tus conocidos o amigos.</p>
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label>{{ form.nombre.label_tag }}</label>
+                        {{ form.nombre }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ form.resumen.label_tag }}</label>
+                        {{ form.resumen }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ form.contenido.label_tag }}</label>
+                        {{ form.contenido}}
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ form.categoria.label_tag }}</label>
+                        {{ form.categoria }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ form.lugar.label_tag }}</label>
+                        {{ form.lugar }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ form.fecha_inicio.label_tag }}</label>
+                        {{ form.fecha_inicio }}
+                        <p class="help-block">Ingresa cuando inciará el evento. DD/MM/AA HH:MM:SS.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ form.fecha_fin.label_tag }}</label>
+                        {{ form.fecha_fin }}
+                        <p class="help-block">Ingresa cuando finalizará el evento. DD/MM/AA HH:MM:SS.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ form.imagen.label_tag }}</label>
+                        {{ form.imagen }}
+                    </div>
+
+                    <div class="checkbox">
+                        <label>
+                            {{ form.es_libre }} {{ form.es_libre.label_tag }}
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>{{ form.costo.label }}</label>
+                        {{ form.costo }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Guardar evento</button>
+                    </div>
+                </form>
+
+            </div><!-- col-md-12 -->
+
+        </div><!-- /row -->
+
+    </div><!-- /container -->
+
+{% endblock content %}
